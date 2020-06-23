@@ -32,6 +32,7 @@ const container = css({
 
 const render = ({ error, spaces = [] }) => {
   if (error) return <p>some error...</p>;
+  if (!spaces || spaces.length === 0) return null;
 
   return (
     <div className={container}>
