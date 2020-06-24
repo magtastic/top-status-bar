@@ -40,10 +40,14 @@ const render = ({ error }) => {
   if (error) return <p>some error...</p>;
 
   const now = new Date();
+  const hours = now.getHours();
+  const mins = now.getMinutes().toString();
 
   return (
     <div className={container}>
-      <p className={timeText}>{`${now.getHours()}:${now.getMinutes()} `}</p>
+      <p className={timeText}>{`${hours}:${
+        mins.length === 1 ? "0" + mins : mins
+      } `}</p>
       <p className={dateText}>
         {` (${now.getDate()}. ${MONTHS[now.getMonth()]})`}
       </p>
