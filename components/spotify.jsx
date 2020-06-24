@@ -39,7 +39,7 @@ const render = ({ error, spotify }) => {
   return (
     <div className={container}>
       <p className={active}>{spotify.track} </p>
-      <p className={text}>{spotify.album} </p>
+      <p className={text}>{spotify.artist || spotify.album} </p>
     </div>
   );
 };
