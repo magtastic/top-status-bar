@@ -4,11 +4,10 @@ import Spotify from "./components/Spotify.jsx";
 import Clock from "./components/clock.jsx";
 
 const container = css({
-  backgroundColor: "rgb(35,37,47)",
   position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
+  top: 10,
+  left: 15,
+  right: 15,
   display: "flex",
   overflow: "hidden",
   justifyContent: "space-between",

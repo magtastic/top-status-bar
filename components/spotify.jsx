@@ -27,6 +27,10 @@ const active = css({
 
 const container = css({
   display: "flex",
+  backgroundColor: "rgb(35,37,47)",
+  borderRadius: 5,
+  paddingRight: 20,
+  paddingLeft: 20,
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center"

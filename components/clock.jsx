@@ -3,7 +3,11 @@ import { css, element } from "uebersicht";
 const container = css({
   display: "flex",
   flexDirection: "row",
-  alignItems: "center"
+  alignItems: "center",
+  backgroundColor: "rgb(35,37,47)",
+  borderRadius: 5,
+  paddingRight: 20,
+  paddingLeft: 20
 });
 
 const timeText = css({

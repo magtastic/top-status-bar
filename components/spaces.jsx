@@ -1,8 +1,9 @@
 import { css, element } from "uebersicht";
 
 const spaceContainer = css({
-  marginLeft: 10
+  paddingRight: 10
 });
+const spaceContainerNoMargin = css({ marginLeft: 0 });
 
 const underline = css({
   width: "100%",
@@ -27,6 +28,12 @@ const active = css({
 
 const container = css({
   display: "flex",
+  borderWidth: 2,
+  backgroundColor: "rgb(35,37,47)",
+  borderRadius: 5,
+  alignItems: "center",
+  paddingRight: 20,
+  paddingLeft: 20,
   flexDirection: "row"
 });
 
@@ -36,8 +43,14 @@ const render = ({ error, spaces = [] }) => {
 
   return (
     <div className={container}>
-      {spaces.map(space => (
-        <div className={spaceContainer}>
+      {spaces.map((space, index) => (
+        <div
+          className={
+            index === spaces.length - 1
+              ? spaceContainerNoMargin
+              : spaceContainer
+          }
+        >
           <p className={space.focused ? active : text}>{space.index}</p>
           <div className={space.display === 1 ? null : underline} />
         </div>
