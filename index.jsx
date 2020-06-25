@@ -42,7 +42,7 @@ export const render = ({ output, error }) => {
   if (error) {
     return (
       <div className={container}>
-        <p>error</p>
+        <p>{String(error)}</p>
       </div>
     );
   }
