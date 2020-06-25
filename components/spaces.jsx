@@ -55,10 +55,6 @@ const container = css({
   flexDirection: "row"
 });
 
-const italic = css({
-  borderWidth: 1
-});
-
 const render = ({ error, spaces }) => {
   if (error) return <p>some error...</p>;
 
