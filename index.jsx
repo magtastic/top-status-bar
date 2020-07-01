@@ -1,6 +1,5 @@
 import { run, css } from "uebersicht";
 import Spaces from "./components/spaces.jsx";
-import Spotify from "./components/Spotify.jsx";
 import Clock from "./components/clock.jsx";
 
 const container = css({
@@ -17,10 +16,9 @@ const container = css({
 
 export const command = `
 SPACES=$(./top-status-bar/scripts/spaces.sh);
-SPOTIFY=$(./top-status-bar/scripts/spotify.sh);
 
 echo $(cat <<-EOF
-  { "spaces": $SPACES, "spotify": $SPOTIFY } 
+  { "spaces": $SPACES } 
 EOF);
 `;
 
@@ -44,7 +42,6 @@ export const render = ({ output, error }) => {
   return (
     <div className={container}>
       <Spaces spaces={result(output, "spaces")} />
-      <Spotify spotify={result(output, "spotify")} />
       <Clock />
     </div>
   );
