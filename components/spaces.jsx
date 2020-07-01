@@ -38,6 +38,7 @@ const container = css({
 });
 
 const render = ({ error, spaces = [] }) => {
+  console.log({ error, spaces });
   if (error) return <p>some error...</p>;
   if (!spaces || spaces.length === 0) return null;
 
@@ -45,6 +46,7 @@ const render = ({ error, spaces = [] }) => {
     <div className={container}>
       {spaces.map((space, index) => (
         <div
+          key={space.id}
           className={
             index === spaces.length - 1
               ? spaceContainerNoMargin
