@@ -5,7 +5,8 @@ const container = css({
   flexDirection: "row",
   alignItems: "center",
   backgroundColor: "rgb(35,37,47)",
-  borderRadius: 5,
+  borderBottomLeftRadius: 5,
+  borderBottomRightRadius: 5,
   paddingRight: 20,
   paddingLeft: 20
 });

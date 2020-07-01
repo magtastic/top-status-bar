@@ -18,33 +18,35 @@ const text = css({
   margin: 0
 });
 
-const active = css({
-  fontSize: 13,
+const focusedWindow = css({
   fontWeight: "500",
-  color: "#72ee7a",
-  padding: 0,
-  margin: 0
+  color: "#72ee7a"
+});
+
+const visibleWindow = css({
+  fontWeight: "500",
+  color: "rgba(0,165,249,1)"
 });
 
 const container = css({
   display: "flex",
   borderWidth: 2,
   backgroundColor: "rgb(35,37,47)",
-  borderRadius: 5,
+  borderBottomLeftRadius: 5,
+  borderBottomRightRadius: 5,
   alignItems: "center",
   paddingRight: 20,
   paddingLeft: 20,
   flexDirection: "row"
 });
 
-const render = ({ error, spaces = [] }) => {
-  console.log({ error, spaces });
+const render = ({ error, spaces }) => {
+  const convertedSpaces = spaces === "" ? [] : spaces;
   if (error) return <p>some error...</p>;
-  if (!spaces || spaces.length === 0) return null;
 
   return (
     <div className={container}>
-      {spaces.map((space, index) => (
+      {convertedSpaces.map((space, index) => (
         <div
           key={space.id}
           className={
@@ -53,7 +55,14 @@ const render = ({ error, spaces = [] }) => {
               : spaceContainer
           }
         >
-          <p className={space.focused ? active : text}>{space.index}</p>
+          <p
+            className={`${text} ${space.focused ? focusedWindow : ""} ${
+              space.visible && !space.focused ? visibleWindow : ""
+            } 
+            `}
+          >
+            {space.index}
+          </p>
           <div className={space.display === 1 ? null : underline} />
         </div>
       ))}
