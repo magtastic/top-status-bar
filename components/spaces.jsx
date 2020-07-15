@@ -50,6 +50,7 @@ const ICONS_FOR_APPLICATIONS = {
   Safari: "",
   Code: "",
   Xcode: "",
+  Mail: "",
   Simulator: "",
   "Google Chrome": "",
   iTerm2: "",
