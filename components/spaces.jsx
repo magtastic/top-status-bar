@@ -55,12 +55,7 @@ const render = ({ error, spaces }) => {
               : spaceContainer
           }
         >
-          <p
-            className={`${text} ${space.focused ? focusedWindow : ""} ${
-              space.visible && !space.focused ? visibleWindow : ""
-            } 
-            `}
-          >
+          <p className={`${text} ${space.focused ? focusedWindow : ""}`}>
             {space.index}
           </p>
           <div className={space.display === 1 ? null : underline} />
