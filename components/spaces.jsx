@@ -62,8 +62,8 @@ const getCharForSpace = window => {
     return ICONS_FOR_APPLICATIONS[window.app];
   }
 
-  console.log("GETTING CHAR FOR WINDOW");
-  console.log(window);
+  console.log("Unknow application.. maybe set a icon for it?");
+  console.log(`Application name: ${window.app}`);
   return window.space;
 };
 
