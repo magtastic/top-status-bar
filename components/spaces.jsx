@@ -2,44 +2,33 @@ import { css, element } from "uebersicht";
 
 const spaceContainer = css({
   display: "flex",
-  borderWidth: 1,
-  borderColor: "white",
   flexDirection: "row",
-  paddingRight: 10
-});
-
-const paddingLeft = css({
-  paddingLeft: 10
-});
-
-const spaceContainerNoMargin = css({
-  display: "flex",
-  flexDirection: "row",
-  marginLeft: 0,
-  borderWidth: 1,
-  borderColor: "white"
-});
-
-const underline = css({
-  width: "100%",
-  height: 1,
-  backgroundColor: "white"
+  margin: 0
 });
 
 const text = css({
-  fontSize: 13,
-  color: "white",
+  fontSize: 17,
+  padding: 0,
+  margin: 0,
+  paddingLeft: 10,
+  paddingRight: 10
+});
+
+const textWithNoPadding = css({
+  fontSize: 17,
   padding: 0,
   margin: 0
 });
 
 const focusedWindow = css({
-  fontWeight: "500",
   color: "#72ee7a"
 });
 
+const unfocusedWindow = css({
+  color: "#FFFFFF"
+});
+
 const visibleWindow = css({
-  fontWeight: "500",
   color: "rgba(0,165,249,1)"
 });
 
@@ -55,34 +44,66 @@ const container = css({
   flexDirection: "row"
 });
 
-const render = ({ error, spaces }) => {
-  if (error) return <p>some error...</p>;
+const ICONS_FOR_APPLICATIONS = {
+  Slack: "",
+  Safari: "",
+  Code: "",
+  "Google Chrome": "",
+  iTerm2: "",
+  Spotify: ""
+};
+
+const getCharForSpace = window => {
+  if (!window) {
+    return "";
+  }
+
+  if (ICONS_FOR_APPLICATIONS[window.app]) {
+    return ICONS_FOR_APPLICATIONS[window.app];
+  }
+
+  console.log("GETTING CHAR FOR WINDOW");
+  console.log(window);
+  return window.space;
+};
+
+const render = ({ error, yabai }) => {
+  if (error || !yabai) return <p>some error...</p>;
 
   return (
     <div className={container}>
-      {spaces.map((space, index) => (
-        <div
-          key={space.id}
-          className={
-            index === spaces.length - 1
-              ? spaceContainerNoMargin
-              : spaceContainer
+      {yabai.spaces.map((space, index) => {
+        const windowsForSpace = yabai.windows.filter(
+          window => window.space === space.index
+        );
+        let biggestWidnowInSpace = windowsForSpace[0];
+        for (let i = 0; i < windowsForSpace.length; i++) {
+          const size = windowsForSpace[i].frame.w * windowsForSpace[i].frame.h;
+          if (
+            size >
+            biggestWidnowInSpace.frame.w * biggestWidnowInSpace.frame.h
+          ) {
+            biggestWidnowInSpace = windowsForSpace[i];
           }
-        >
-          <p
-            className={`${text} ${space.focused ? focusedWindow : ""} ${
-              space.display === 1 ? null : italic
-            }
-            `}
-          >
-            {space.index}
-          </p>
-          {spaces[index + 1] && spaces[index + 1].display !== space.display && (
-            <p className={`${text} ${paddingLeft}`}>[</p>
-          )}
-        </div>
-      ))}
-      <p className={`${text} ${paddingLeft}`}>]</p>
+        }
+
+        return (
+          <div key={space.id} className={spaceContainer}>
+            <p
+              className={`${text} ${
+                space.focused ? focusedWindow : unfocusedWindow
+              }`}
+            >
+              {getCharForSpace(biggestWidnowInSpace)}
+            </p>
+            {yabai.spaces[index + 1] &&
+              yabai.spaces[index + 1].display !== space.display && (
+                <p className={`${textWithNoPadding} ${unfocusedWindow}`}>[</p>
+              )}
+          </div>
+        );
+      })}
+      <p className={`${textWithNoPadding} ${unfocusedWindow}`}>]</p>
     </div>
   );
 };

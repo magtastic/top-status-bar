@@ -11,14 +11,14 @@ const container = css({
   display: "flex",
   overflow: "hidden",
   justifyContent: "space-between",
-  fontFamily: "Fira Code"
+  fontFamily: "Hack Nerd Font"
 });
 
 export const command = `
-SPACES=$(./top-status-bar/scripts/spaces.sh);
+YABAI=$(./top-status-bar/scripts/spaces.sh);
 
 echo $(cat <<-EOF
-  { "spaces": $SPACES } 
+  { "yabai": $YABAI } 
 EOF);
 `;
 
@@ -26,19 +26,27 @@ const result = (data, key) => {
   try {
     return JSON.parse(data)[key];
   } catch (e) {
+    console.log(e);
     return "";
   }
 };
 
 export const updateState = (nextState, previousState) => {
-  const spaces = result(nextState.output, "spaces");
-  if (spaces === "" || nextState.error) {
+  try {
+    console.log({ nextState, previousState });
+    const fixedSpaces = nextState.output.replace('"spaces":,', '"spaces":[],');
+    const yabai = result(fixedSpaces, "yabai");
+    if (yabai.spaces === "" || nextState.error) {
+      return previousState;
+    }
+    return { ...nextState, yabai };
+  } catch (e) {
+    console.log(e);
     return previousState;
   }
-  return nextState;
 };
 
-export const render = ({ output, error }) => {
+export const render = ({ output, error, yabai }) => {
   if (error) {
     return (
       <div className={container}>
@@ -49,7 +57,7 @@ export const render = ({ output, error }) => {
 
   return (
     <div className={container}>
-      <Spaces spaces={result(output, "spaces")} />
+      <Spaces yabai={yabai} />
       <Clock />
     </div>
   );
