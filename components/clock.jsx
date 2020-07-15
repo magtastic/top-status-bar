@@ -50,7 +50,7 @@ const render = ({ error }) => {
 
   return (
     <div className={container}>
-      <p className={timeText}>{`${hours}:${
+      <p className={timeText}>{` ${hours}:${
         mins.length === 1 ? "0" + mins : mins
       } `}</p>
       <p className={dateText}>
