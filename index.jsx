@@ -29,6 +29,14 @@ const result = (data, key) => {
   }
 };
 
+export const updateState = (nextState, previousState) => {
+  const spaces = result(nextState.output, "spaces");
+  if (spaces === "" || nextState.error) {
+    return previousState;
+  }
+  return nextState;
+};
+
 export const render = ({ output, error }) => {
   if (error) {
     return (
