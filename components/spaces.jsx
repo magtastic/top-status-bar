@@ -11,7 +11,7 @@ const text = css({
   padding: 0,
   margin: 0,
   paddingLeft: 10,
-  paddingRight: 10
+  paddingRight: 13
 });
 
 const textWithNoPadding = css({
@@ -44,10 +44,13 @@ const container = css({
   flexDirection: "row"
 });
 
+// FIND MORE ICONS AT: https://www.nerdfonts.com/cheat-sheet
 const ICONS_FOR_APPLICATIONS = {
   Slack: "",
   Safari: "",
   Code: "",
+  Xcode: "",
+  Simulator: "",
   "Google Chrome": "",
   iTerm2: "",
   Spotify: ""
