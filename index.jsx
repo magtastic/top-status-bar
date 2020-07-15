@@ -4,9 +4,10 @@ import Clock from "./components/clock.jsx";
 
 const container = css({
   position: "fixed",
+  backgroundColor: "rgb(35,37,47)",
   top: 0,
-  left: 15,
-  right: 15,
+  left: 0,
+  right: 0,
   display: "flex",
   overflow: "hidden",
   justifyContent: "space-between",
