@@ -1,9 +1,24 @@
 import { css, element } from "uebersicht";
 
 const spaceContainer = css({
+  display: "flex",
+  borderWidth: 1,
+  borderColor: "white",
+  flexDirection: "row",
   paddingRight: 10
 });
-const spaceContainerNoMargin = css({ marginLeft: 0 });
+
+const paddingLeft = css({
+  paddingLeft: 10
+});
+
+const spaceContainerNoMargin = css({
+  display: "flex",
+  flexDirection: "row",
+  marginLeft: 0,
+  borderWidth: 1,
+  borderColor: "white"
+});
 
 const underline = css({
   width: "100%",
@@ -40,13 +55,16 @@ const container = css({
   flexDirection: "row"
 });
 
+const italic = css({
+  borderWidth: 1
+});
+
 const render = ({ error, spaces }) => {
-  const convertedSpaces = spaces === "" ? [] : spaces;
   if (error) return <p>some error...</p>;
 
   return (
     <div className={container}>
-      {convertedSpaces.map((space, index) => (
+      {spaces.map((space, index) => (
         <div
           key={space.id}
           className={
@@ -55,12 +73,20 @@ const render = ({ error, spaces }) => {
               : spaceContainer
           }
         >
-          <p className={`${text} ${space.focused ? focusedWindow : ""}`}>
+          <p
+            className={`${text} ${space.focused ? focusedWindow : ""} ${
+              space.display === 1 ? null : italic
+            }
+            `}
+          >
             {space.index}
           </p>
-          <div className={space.display === 1 ? null : underline} />
+          {spaces[index + 1] && spaces[index + 1].display !== space.display && (
+            <p className={`${text} ${paddingLeft}`}>[</p>
+          )}
         </div>
       ))}
+      <p className={`${text} ${paddingLeft}`}>]</p>
     </div>
   );
 };
