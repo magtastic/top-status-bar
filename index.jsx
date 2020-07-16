@@ -1,6 +1,7 @@
 import { run, css } from "uebersicht";
 import Spaces from "./components/spaces.jsx";
 import Clock from "./components/clock.jsx";
+import Airpods from "./components/airpods.jsx";
 
 const container = css({
   position: "fixed",
@@ -14,11 +15,17 @@ const container = css({
   fontFamily: "Hack Nerd Font"
 });
 
+const rightContainer = css({
+  display: "flex",
+  flexDirection: "row"
+});
+
 export const command = `
 YABAI=$(./top-status-bar/scripts/spaces.sh);
+AIRPODS=$(./top-status-bar/scripts/airpods.sh);
 
 echo $(cat <<-EOF
-  { "yabai": $YABAI } 
+  { "yabai": $YABAI, "airpods": $AIRPODS } 
 EOF);
 `;
 
@@ -36,17 +43,18 @@ export const updateState = (nextState, previousState) => {
     console.log({ nextState, previousState });
     const fixedSpaces = nextState.output.replace('"spaces":,', '"spaces":[],');
     const yabai = result(fixedSpaces, "yabai");
+    const airpods = result(fixedSpaces, "airpods");
     if (yabai.spaces === "" || nextState.error) {
       return previousState;
     }
-    return { ...nextState, yabai };
+    return { ...nextState, yabai, airpods };
   } catch (e) {
     console.log(e);
     return previousState;
   }
 };
 
-export const render = ({ output, error, yabai }) => {
+export const render = ({ output, error, yabai, airpods }) => {
   if (error) {
     return (
       <div className={container}>
@@ -58,7 +66,10 @@ export const render = ({ output, error, yabai }) => {
   return (
     <div className={container}>
       <Spaces yabai={yabai} />
-      <Clock />
+      <div className={rightContainer}>
+        <Clock />
+        <Airpods airpods={airpods} />
+      </div>
     </div>
   );
 };
