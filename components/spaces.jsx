@@ -55,7 +55,8 @@ const ICONS_FOR_APPLICATIONS = {
   "Google Chrome": "",
   iTerm2: "",
   Calendar: "",
-  Spotify: ""
+  Spotify: "",
+  "Keychain Access": ""
 };
 
 const getCharForSpace = window => {
