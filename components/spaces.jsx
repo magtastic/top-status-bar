@@ -54,6 +54,7 @@ const ICONS_FOR_APPLICATIONS = {
   Simulator: "",
   "Google Chrome": "",
   iTerm2: "",
+  Calendar: "",
   Spotify: ""
 };
 
