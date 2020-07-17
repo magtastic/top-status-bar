@@ -56,6 +56,8 @@ const ICONS_FOR_APPLICATIONS = {
   iTerm2: "",
   Calendar: "",
   Spotify: "",
+  Figma: "",
+  Finder: "",
   "Keychain Access": ""
 };
 
