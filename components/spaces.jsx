@@ -55,8 +55,11 @@ const ICONS_FOR_APPLICATIONS = {
   "Google Chrome": "",
   iTerm2: "",
   Calendar: "",
+  Übersicht: "",
   Spotify: "",
   Figma: "",
+  "zoom.us": "",
+  "MongoDB Compass": "",
   Finder: "",
   "Keychain Access": ""
 };
