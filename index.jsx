@@ -40,11 +40,15 @@ const result = (data, key) => {
 
 export const updateState = (nextState, previousState) => {
   try {
-    console.log({ nextState, previousState });
     const fixedSpaces = nextState.output.replace('"spaces":,', '"spaces":[],');
     const yabai = result(fixedSpaces, "yabai");
     const airpods = result(fixedSpaces, "airpods");
-    if (yabai.spaces === "" || nextState.error) {
+    if (
+      yabai === "" ||
+      yabai.spaces === "" ||
+      yabai.spaces.length === 0 ||
+      nextState.error
+    ) {
       return previousState;
     }
     return { ...nextState, yabai, airpods };
