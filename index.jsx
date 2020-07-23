@@ -2,6 +2,7 @@ import { run, css } from "uebersicht";
 import Spaces from "./components/spaces.jsx";
 import Clock from "./components/clock.jsx";
 import Airpods from "./components/airpods.jsx";
+import Keyboard from "./components/keyboard.jsx";
 
 const container = css({
   position: "fixed",
@@ -23,9 +24,10 @@ const rightContainer = css({
 export const command = `
 YABAI=$(./top-status-bar/scripts/spaces.sh);
 AIRPODS=$(./top-status-bar/scripts/airpods.sh);
+KEYBOARD=$(./top-status-bar/scripts/keyboard.sh);
 
 echo $(cat <<-EOF
-  { "yabai": $YABAI, "airpods": $AIRPODS } 
+  { "yabai": $YABAI, "airpods": $AIRPODS, "keyboard": $KEYBOARD } 
 EOF);
 `;
 
@@ -43,6 +45,7 @@ export const updateState = (nextState, previousState) => {
     const fixedSpaces = nextState.output.replace('"spaces":,', '"spaces":[],');
     const yabai = result(fixedSpaces, "yabai");
     const airpods = result(fixedSpaces, "airpods");
+    const keyboard = result(fixedSpaces, "keyboard");
     if (
       yabai === "" ||
       yabai.spaces === "" ||
@@ -51,14 +54,14 @@ export const updateState = (nextState, previousState) => {
     ) {
       return previousState;
     }
-    return { ...nextState, yabai, airpods };
+    return { ...nextState, yabai, airpods, keyboard };
   } catch (e) {
     console.log(e);
     return previousState;
   }
 };
 
-export const render = ({ output, error, yabai, airpods }) => {
+export const render = ({ output, error, yabai, airpods, keyboard }) => {
   if (error) {
     return (
       <div className={container}>
@@ -72,6 +75,7 @@ export const render = ({ output, error, yabai, airpods }) => {
       <Spaces yabai={yabai} />
       <div className={rightContainer}>
         <Clock />
+        <Keyboard keyboard={keyboard} />
         <Airpods airpods={airpods} />
       </div>
     </div>
