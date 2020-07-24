@@ -114,7 +114,9 @@ const render = ({ error, yabai }) => {
           </div>
         );
       })}
-      <p className={`${textWithNoPadding} ${unfocusedWindow}`}>]</p>
+      {yabai.displays.length > 1 && (
+        <p className={`${textWithNoPadding} ${unfocusedWindow}`}>]</p>
+      )}
     </div>
   );
 };
