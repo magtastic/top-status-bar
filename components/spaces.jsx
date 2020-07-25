@@ -57,6 +57,8 @@ const ICONS_FOR_APPLICATIONS = {
   Calendar: "",
   Übersicht: "",
   Spotify: "",
+  "Unity Hub": "",
+  Unity: "",
   Figma: "",
   "zoom.us": "",
   "MongoDB Compass": "",
