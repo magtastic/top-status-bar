@@ -6,7 +6,9 @@ import Keyboard from "./components/keyboard.jsx";
 
 const container = css({
   position: "fixed",
-  backgroundColor: "rgb(35,37,47)",
+  backgroundColor: "rgb(47,52,63)",
+  height: 23,
+  alignItems: "center",
   top: 0,
   left: 0,
   right: 0,
